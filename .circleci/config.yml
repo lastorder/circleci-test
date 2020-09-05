@@ -52,10 +52,50 @@ jobs:
 
       # - run: gcloud version
 
+  image-test1:
+    executor: gcp-cli/google
+    steps:
+      - run: gcloud version
+
+
+  image-test2:
+    docker:
+      - image: google/cloud-sdk:308.0.0
+    steps:
+      - run: gcloud version
+
+  image-test3:
+    docker:
+      - image: google/cloud-sdk:308.0.0-alpine
+    steps:
+      - run: gcloud version
+      - k8s/install-kubectl
+      # - run: gcloud components install kubectl
+      - run: gcloud version
+      - run: kubectl version
+
+  image-test4:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - gcp-cli/install:
+          version: 308.0.0
+      - k8s/install-kubectl
+      # - run: gcloud components install kubectl
+      - run: gcloud version
+      - run: kubectl version    
+
+
 
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - test1
+      # - test1
+      - image-test1
+      - image-test2
+      - image-test3
+      - image-test4
+
+
