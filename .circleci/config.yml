@@ -4,8 +4,14 @@ version: 2.1
 orbs:
   # https://circleci.com/orbs/registry/orb/circleci/gcp-cli
   gcp-cli: circleci/gcp-cli@1.8.4
+
   # https://circleci.com/orbs/registry/orb/circleci/gcp-gke
   gcp-gke: circleci/gcp-gke@1.1.0
+
+  # https://circleci.com/orbs/registry/orb/circleci/kubernetes#commands-get-rollout-status
+  k8s: circleci/kubernetes@0.11.1
+
+
 
 
 
@@ -29,8 +35,11 @@ jobs:
       #       curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-308.0.0-linux-x86_64.tar.gz | tar xz
       #       echo 'source ~/google-cloud-sdk/path.bash.inc' >> $BASH_ENV
 
-      - gcp-gke/install
+      # - gcp-gke/install
 
+      - gcp-cli/install:
+          version: 308.0.0
+      - k8s/install-kubectl
 
       - run: gcloud version
       - run: kubectl version
@@ -40,8 +49,7 @@ jobs:
       # - run: docker run -ti  google/cloud-sdk:308.0.0 gcloud version
       # - run: docker run -ti  google/cloud-sdk:308.0.0-slim gcloud version
       # - run: docker run -ti  google/cloud-sdk:308.0.0-alpine gcloud version
-      # - gcp-cli/install:
-      #     version: 308.0.0
+
       # - run: gcloud version
 
 
