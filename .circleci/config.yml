@@ -4,6 +4,7 @@ version: 2.1
 orbs:
   # https://circleci.com/orbs/registry/orb/circleci/gcp-cli
   gcp-cli: circleci/gcp-cli@1.8.4
+  # https://circleci.com/orbs/registry/orb/circleci/gcp-gke
   gcp-gke: circleci/gcp-gke@1.1.0
 
 
@@ -20,15 +21,19 @@ jobs:
     steps:
       - run: gcloud version
       # - run: gcloud components update
-      - run:
-          name: reinstall update
-          command: |
-            sudo rm -rf /opt/google-cloud-sdk
-            cd ~/
-            curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-308.0.0-linux-x86_64.tar.gz | tar xz
-            echo 'source ~/google-cloud-sdk/path.bash.inc' >> $BASH_ENV
+      # - run:
+      #     name: reinstall update
+      #     command: |
+      #       sudo rm -rf /opt/google-cloud-sdk
+      #       cd ~/
+      #       curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-308.0.0-linux-x86_64.tar.gz | tar xz
+      #       echo 'source ~/google-cloud-sdk/path.bash.inc' >> $BASH_ENV
+
+      - gcp-gke/install
+
 
       - run: gcloud version
+      - run: kubectl version
 
       # - run: gcloud components install kubectl
       # - run: kubectl version
