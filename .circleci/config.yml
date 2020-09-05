@@ -2,12 +2,32 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+  # https://circleci.com/orbs/registry/orb/circleci/gcp-cli
+  gcp-cli: circleci/gcp-cli@1.8.4
+
+executors:
+  test-machine-executor:
+    machine:
+      # https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
+      image: ubuntu-1604:202007-01
+
+jobs:
+  test1:
+    executor: test-machine-executor
+    steps:
+      - run: gcloud version
+      - run: kubectl version
+      # - run: docker run -ti  google/cloud-sdk:308.0.0 gcloud version
+      # - run: docker run -ti  google/cloud-sdk:308.0.0-slim gcloud version
+      # - run: docker run -ti  google/cloud-sdk:308.0.0-alpine gcloud version
+      # - gcp-cli/install:
+      #     version: 308.0.0
+      # - run: gcloud version
+
+
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - welcome/run
+      - test1
