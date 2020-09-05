@@ -70,7 +70,7 @@ jobs:
     steps:
       - run: gcloud version
       - k8s/install-kubectl
-      # - run: gcloud components install kubectl
+      - run: gcloud components install kubectl
       - run: gcloud version
       - run: kubectl version
 
@@ -93,9 +93,9 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       # - test1
-      - image-test1
-      - image-test2
+      # - image-test1
+      # - image-test2
       - image-test3
-      - image-test4
+      # - image-test4
 
 
