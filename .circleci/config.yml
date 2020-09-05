@@ -16,8 +16,11 @@ jobs:
     executor: test-machine-executor
     steps:
       - run: gcloud version
-      - run: gcloud components install kubectl
-      - run: kubectl version
+      - run: gcloud components update
+      - run: gcloud version
+
+      # - run: gcloud components install kubectl
+      # - run: kubectl version
       # - run: docker run -ti  google/cloud-sdk:308.0.0 gcloud version
       # - run: docker run -ti  google/cloud-sdk:308.0.0-slim gcloud version
       # - run: docker run -ti  google/cloud-sdk:308.0.0-alpine gcloud version
