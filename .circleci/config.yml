@@ -26,10 +26,10 @@ jobs:
     executor: test-machine-executor
     steps:
       - run: gcloud version
-      - run: gcloud components update
-      - run: gcloud components install kubectl
-      - run: gcloud version
-      - run: kubectl version
+      # - run: gcloud components update
+      # - run: gcloud components install kubectl
+      # - run: gcloud version
+      # - run: kubectl version
 
       # - run:
       #     name: reinstall update
@@ -41,9 +41,12 @@ jobs:
 
       # - gcp-gke/install
 
-      # - gcp-cli/install:
-      #     version: 308.0.0
-      # - k8s/install-kubectl
+      - gcp-cli/install:
+          version: 308.0.0
+      - k8s/install-kubectl
+
+      - run: gcloud version
+      - run: kubectl version
 
       # - run: gcloud version
       # - run: kubectl version
