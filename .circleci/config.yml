@@ -69,7 +69,9 @@ jobs:
     docker:
       - image: google/cloud-sdk:308.0.0
     steps:
-      - run: gcloud version
+      - gcp/initialize
+      - run: gcloud --quiet container clusters get-credentials etg-staging
+      - run: kubectl get namespaces
 
   image-test3:
     docker:
@@ -100,9 +102,9 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       # - test1
-      - image-test1
+      # - image-test1
       - image-test2
-      - image-test3
-      - image-test4
+      # - image-test3
+      # - image-test4
 
 
