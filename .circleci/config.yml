@@ -37,12 +37,12 @@ jobs:
 
       # - gcp-gke/install
 
-      - gcp-cli/install:
-          version: 308.0.0
-      - k8s/install-kubectl
+      # - gcp-cli/install:
+      #     version: 308.0.0
+      # - k8s/install-kubectl
 
-      - run: gcloud version
-      - run: kubectl version
+      # - run: gcloud version
+      # - run: kubectl version
 
       # - run: gcloud components install kubectl
       # - run: kubectl version
@@ -92,10 +92,10 @@ workflows:
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      # - test1
+      - test1
       # - image-test1
       # - image-test2
-      - image-test3
+      # - image-test3
       # - image-test4
 
 
